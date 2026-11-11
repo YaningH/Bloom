@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Bloom — a type garden</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="landscape" aria-hidden="true"></div>
+
+  <header>
+    <button id="reset">Restart ↗</button>
+  </header>
+
+  <main
+    id="garden"
+    aria-label="Interactive garden. Click or tap to water the scattered seeds."
+  >
+    <button id="start" class="water-button">
+      Click to water
+    </button>
+
+    <div id="particles" aria-hidden="true"></div>
+    <div id="effects" aria-hidden="true"></div>
+
+    <span
+      class="word-label"
+      aria-label="The seeds grow into the word bloom"
+    >
+      bloom
+    </span>
+  </main>
+</body>
+</html>

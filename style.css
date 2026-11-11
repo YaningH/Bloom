@@ -1,0 +1,390 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  --cream: #f2f1c9;
+}
+
+body {
+  margin: 0;
+  background: #263b20;
+  color: var(--cream);
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+
+  background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
+
+  background-size: 100px 100px;
+  background-repeat: repeat;
+}
+
+header,
+footer {
+  position: fixed;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+header {
+  top: 25px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  font: italic 30px Georgia, serif;
+}
+
+a span {
+  font: 11px Arial, sans-serif;
+  margin-left: 12px;
+  opacity: 1;
+}
+
+button {
+  border: 1px solid #f2f1c955;
+  border-radius: 30px;
+  background: transparent;
+  color: inherit;
+  padding: 11px 19px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.5;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 4px;
+}
+
+main {
+  position: absolute;
+  inset: 80px 0 95px;
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+
+.intro {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.intro > span,
+footer,
+.caption > span {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+}
+
+h1 {
+  font: normal 35px / 1.04 Georgia, serif;
+  margin: 17px 0 12px;
+}
+
+.intro p {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.seed {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--cream);
+  font: 12px / 1 Georgia, serif;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.seed.grown {
+  color: #fffbd7;
+  text-shadow: 0 0 5px #f3efb84d;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.caption p {
+  font: italic 17px Georgia, serif;
+  margin: 10px;
+}
+
+.word-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+footer {
+  bottom: 25px;
+  border-top: 1px solid #f2f1c935;
+  padding-top: 20px;
+  font-size: 9px;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  letter-spacing: 0.6px;
+}
+
+.track {
+  width: 100px;
+  height: 2px;
+  background: #f2f1c933;
+}
+
+.track i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--cream);
+  transition: width 0.4s;
+}
+
+.drop,
+.ripple,
+.flower {
+  position: absolute;
+  pointer-events: none;
+}
+
+.drop {
+  width: 3px;
+  height: 9px;
+  background: #d9eddf;
+  border-radius: 70%;
+  animation: rain 0.65s ease-in forwards;
+}
+
+.ripple {
+  border: 1px solid #eff9dc88;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  animation: ripple 1s ease-out forwards;
+}
+
+.flower {
+  font: 30px Georgia, serif;
+  color: #fcf1ac;
+  animation: sprout 0.9s ease-out both;
+  transform-origin: bottom center;
+}
+
+@keyframes rain {
+  from {
+    opacity: 1;
+    transform: translate(var(--dx), -40px);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(var(--dx), 20px);
+  }
+}
+
+@keyframes ripple {
+  from {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 1;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(9);
+    opacity: 0;
+  }
+}
+
+@keyframes sprout {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-30deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(8deg);
+  }
+}
+
+@media (max-width: 600px) {
+  header,
+  footer {
+    left: 20px;
+    right: 20px;
+  }
+
+  a span {
+    display: none;
+  }
+
+  h1 {
+    font-size: 29px;
+  }
+
+  footer > span:first-child {
+    display: none;
+  }
+
+  .track {
+    width: 65px;
+  }
+
+  .intro {
+    top: 4%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drop,
+  .ripple {
+    animation-duration: 0.01s;
+  }
+
+  .flower {
+    animation: none;
+  }
+}
+
+/*
+  Quiet version: only the restart control remains.
+  Blur is applied in CSS so the original photograph stays editable.
+*/
+
+body {
+  background: #a6b36a;
+  color: #fffde6;
+}
+
+header {
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+header button {
+  pointer-events: auto;
+  background: #34512d30;
+  backdrop-filter: blur(10px);
+  background: transparent;
+  color: white;
+  border: 0;
+  border-radius: 30px;
+  padding: 11px 19px;
+  font-size: 13px;
+}
+
+
+main {
+  inset: 0;
+}
+
+.seed {
+  color: #ffffff;
+}
+
+.seed.grown {
+  color: #ffffff;
+}
+
+/* Darker garden and central first-watering button. */
+
+.water-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 120px;
+  height: 120px;
+
+  border-radius: 50%;
+  border: 1px solid #fffde699;
+  background: #b6c58b30;
+  border-color: #fffde6;
+
+  font: 15px helvetica;
+  backdrop-filter: blur(12px);
+
+  z-index: 3;
+  cursor: pointer;
+
+   background: 0.25s;
+   border-color: 0.25s;
+   padding: 5px;
+}
+
+.water-button:hover {
+  background: #0d541555;
+  color: #fffde6;
+}
+
+.water-button[hidden] {
+  display: none;
+}
+
+.landscape {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    radial-gradient(
+      ellipse at 48% 48%,
+      rgba(219, 149, 161, 0.586) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 0% 55%,
+      #f1cbe0 0%,
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 95% 10%,
+      #5ca4ba 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 35% 100%,
+      #edd4ae 0%,
+      transparent 45%
+    ),
+    linear-gradient(
+      145deg,
+      #492b35,
+      #32283d 50%,
+      #3b5c70
+    );
+
+  filter: none;
+}
